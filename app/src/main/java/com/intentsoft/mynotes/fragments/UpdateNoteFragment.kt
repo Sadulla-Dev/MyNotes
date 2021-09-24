@@ -58,8 +58,8 @@ class UpdateNoteFragment : Fragment() {
                 val note = Note(currentNote.id, title, body)
                 noteViewModel.updateNote(note)
 
+                activity?.toast("Note Update!")
                 view.findNavController().navigate(R.id.action_updateNoteFragment_to_homeFragment)
-
             } else {
                 activity?.toast("Enter a note title please")
             }
