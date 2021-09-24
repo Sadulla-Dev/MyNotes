@@ -71,7 +71,6 @@
         android:src="@drawable/ic_done"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="bersyte"
-        android:focusable="true" />
+        android:contentDescription="@string/bersyte" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
