@@ -18,38 +18,29 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var noteViewModel: NoteViewModel
+    private lateinit var notesViewModel: NoteViewModel
     private lateinit var noteAdapter: NoteAdapter
-
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        _binding = FragmentHomeBinding.inflate(
-            inflater,container, false
-        )
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        noteViewModel = (activity as MainActivity).noteViewModel
+        notesViewModel = (activity as MainActivity).noteViewModel
         setUpRecyclerView()
 
-        binding.fabAddNote.setOnClickListener { mView->
-            mView.findNavController().navigate(R.id.action_homeFragment_to_newNoteFragment)
+        binding.fabAddNote.setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_newNoteFragment)
         }
     }
 
@@ -66,12 +57,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         }
 
         activity?.let {
-            noteViewModel.getAllNote().observe(viewLifecycleOwner,{ note ->
+            notesViewModel.getAllNote().observe(viewLifecycleOwner, { note ->
                 noteAdapter.differ.submitList(note)
-                 updateUI(note)
+                updateUI(note)
             })
         }
+
     }
+
     private fun updateUI(note: List<Note>) {
         if (note.isNotEmpty()) {
             binding.cardView.visibility = View.GONE
@@ -82,7 +75,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         }
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
@@ -90,12 +82,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         val mMenuSearch = menu.findItem(R.id.menu_search).actionView as SearchView
         mMenuSearch.isSubmitButtonEnabled = true
         mMenuSearch.setOnQueryTextListener(this)
+
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (query != null) {
@@ -112,11 +101,20 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         return true
     }
 
-    private fun searchNote(query: String?){
-        val searchQuery = "%$query"
-        noteViewModel.searchNote(searchQuery).observe(this,{list ->
-            noteAdapter.differ.submitList(list)
-        })
+
+    private fun searchNote(query: String?) {
+        val searchQuery = "%$query%"
+        notesViewModel.searchNote(searchQuery).observe(
+            this, { list ->
+                noteAdapter.differ.submitList(list)
+            }
+        )
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
