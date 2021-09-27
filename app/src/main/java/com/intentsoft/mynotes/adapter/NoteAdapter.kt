@@ -40,12 +40,23 @@ class NoteAdapter: RecyclerView.Adapter< NoteAdapter.NoteViewHolder>() {
 
         holder.itemBinding.tvNoteTitle.text = currentNote.nateTitle
         holder.itemBinding.tvNoteBody.text = currentNote.noteBody
+        holder.itemBinding.tvtime.text = currentNote.noteTime
         val random = Random()
         val color =
             Color.argb(
                 255, random.nextInt(256),
                 random.nextInt(256), random.nextInt(256)
             )
+        val blue = Color.BLUE
+        val green = Color.GREEN
+
+
+//        val color1 =
+//            Color.argb(
+//                255, random.nextInt(256),
+//                random.nextInt(256), random.nextInt(256)
+//            )
+        
         holder.itemBinding.ibColor.setBackgroundColor(color)
 
         holder.itemView.setOnClickListener { view ->

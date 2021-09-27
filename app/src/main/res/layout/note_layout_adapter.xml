@@ -4,14 +4,13 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/Gray">
+    android:background="@color/colorPrimary">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
-        android:background="@color/white"
         app:cardCornerRadius="5dp"
         app:cardElevation="8dp">
 
@@ -19,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:background="@drawable/card_view_bacground"
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,6 +54,17 @@
                 android:layout_marginTop="16dp"
                 android:maxHeight="170dp"
                 android:text="Type something..."
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tvtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:maxHeight="170dp"
+                android:layout_gravity="end"
+                android:text="23.06.2003"
+                android:textStyle="italic"
                 android:textColor="@color/hintColor"
                 android:textSize="16sp" />
         </LinearLayout>

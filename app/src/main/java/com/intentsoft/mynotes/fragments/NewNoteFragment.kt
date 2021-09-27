@@ -1,7 +1,9 @@
 package com.intentsoft.mynotes.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -11,6 +13,7 @@ import com.intentsoft.mynotes.databinding.FragmentNewNoteBinding
 import com.intentsoft.mynotes.model.Note
 import com.intentsoft.mynotes.toast
 import com.intentsoft.mynotes.viewModel.NoteViewModel
+import java.util.*
 
 
 class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
@@ -39,19 +42,28 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
         super.onViewCreated(view, savedInstanceState)
 
         noteViewModel = (activity as MainActivity).noteViewModel
-
         mView = view
+
 
     }
 
 
 
     private fun saveNote(view: View) {
+        val date = Calendar.getInstance()
+        val year = date.get(Calendar.YEAR)
+        val month = date.get(Calendar.MONTH)
+        val day = date.get(Calendar.DATE)
+        val s = "$year.$month.$day"
+
+
         val noteTitle = binding.etNoteTitle.text.toString().trim()
         val noteBody = binding.etNoteBody.text.toString().trim()
+        val noteTime = s.trim()
+
 
         if (noteTitle.isNotEmpty()) {
-            val note = Note(0, noteTitle, noteBody)
+            val note = Note(0, noteTitle, noteBody,noteTime)
 
             noteViewModel.addNote(note)
             Snackbar.make(
