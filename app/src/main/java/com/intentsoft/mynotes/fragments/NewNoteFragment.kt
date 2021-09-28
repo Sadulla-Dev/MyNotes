@@ -45,6 +45,7 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
         mView = view
 
 
+
     }
 
 
@@ -57,6 +58,7 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
         val s = "$year.$month.$day"
 
 
+
         val noteTitle = binding.etNoteTitle.text.toString().trim()
         val noteBody = binding.etNoteBody.text.toString().trim()
         val noteTime = s.trim()
@@ -67,13 +69,13 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
 
             noteViewModel.addNote(note)
             Snackbar.make(
-                view, "Note saved successfully",
+                view, "Qayd muvaffaqiyatli saqlandi",
                 Snackbar.LENGTH_SHORT
             ).show()
             view.findNavController().navigate(R.id.action_newNoteFragment_to_homeFragment)
 
         } else {
-            activity?.toast("Please enter note title")
+            activity?.toast("Iltimos, eslatma sarlavhasini kiriting")
         }
     }
 

@@ -74,22 +74,22 @@ class UpdateNoteFragment : Fragment() {
                 view.findNavController().navigate(R.id.action_updateNoteFragment_to_homeFragment)
 
             } else {
-                activity?.toast("Enter a note title please")
+                activity?.toast("Iltimos, eslatma sarlavhasini kiriting")
             }
         }
     }
 
     private fun deleteNote() {
         AlertDialog.Builder(activity).apply {
-            setTitle("Delete Note")
-            setMessage("Are you sure you want to permanently delete this note?")
-            setPositiveButton("DELETE") { _, _ ->
+            setTitle("Qaydni o'chirish")
+            setMessage("Haqiqatan ham bu eslatmani butunlay o‘chirib tashlamoqchimisiz?")
+            setPositiveButton("O'chirish") { _, _ ->
                 noteViewModel.deleteNote(currentNote)
                 view?.findNavController()?.navigate(
                     R.id.action_updateNoteFragment_to_homeFragment
                 )
             }
-            setNegativeButton("CANCEL", null)
+            setNegativeButton("Bekor qilish", null)
         }.create().show()
 
     }
